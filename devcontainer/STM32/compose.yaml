@@ -1,0 +1,31 @@
+services:
+  stm32:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - USERNAME=vscode
+        - USER_UID=1000
+        - USER_GID=1000
+        - SBSFU_ZIP=./third_party/SBSFU/en.stm32cube-expansion-sbsfu-v2.6.2.zip
+        - XCUBEIDE_ZIP=./third_party/XCUBEIDE/en.st-stm32cubeide_1.15.1_21094_20240412_1041_amd64.deb_bundle.sh.zip
+        - XCUBEIDE_INSTALLER=st-stm32cubeide_1.15.1_21094_20240412_1041_amd64.deb_bundle.sh
+        - STM32CUBEL4_ZIP=./third_party/STM32L4/en.stm32cubel4-v1-18-1.zip
+    # MacOS: `xhost +localhost` needed?
+    # run as root: `xhost si:localuser:root` needed?
+    # https://stackoverflow.com/questions/60733288/devcontainer-how-to-make-x-display-work-mount-graphics-inside-docker-in-visual
+    volumes:
+      - type: bind
+        source: /tmp/.X11-unix
+        target: /tmp/.X11-unix
+        consistency: cached
+    environment:
+      - DISPLAY="${DISPLAY}"
+    stdin_open: true
+    tty: true
+    privileged: true
+    # If you don't like privileged, the below might be suitable.
+    # NB: JTAG debug seems to have issues with this but privileged works.
+    #devices:
+    #- '/dev/ttyUSB0:/dev/ttyUSB0'
+    #- '/dev/ttyUSB1:/dev/ttyUSB1'

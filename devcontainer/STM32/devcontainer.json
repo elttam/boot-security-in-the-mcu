@@ -1,0 +1,18 @@
+//devcontainer.json
+{
+    // see https://stackoverflow.com/questions/60733288/devcontainer-how-to-make-x-display-work-mount-graphics-inside-docker-in-visual
+    "name": "SecureBoot research: STM32",
+    "dockerComposeFile": "../../STM/devel/docker/compose.yaml",
+    "service": "stm32",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+            ],
+            "settings": {
+                "extensions.ignoreRecommendations": true,
+                "terminal.integrated.shell.linux": "/bin/bash"
+            }  
+        }
+    },
+    "userEnvProbe": "loginInteractiveShell"
+}

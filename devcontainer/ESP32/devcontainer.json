@@ -1,0 +1,25 @@
+{
+    "name": "SecureBoot research: ESP32",
+    "dockerComposeFile": "compose.yaml",
+    "service": "esp32",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "llvm-vs-code-extensions.vscode-clangd",
+                "espressif.esp-idf-extension"
+            ],
+            "settings": {
+                "extensions.ignoreRecommendations": true,
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "idf.showOnboardingOnInit": false,
+                "idf.toolsPath": "${containerEnv:IDF_TOOLS_PATH}",
+                "idf.espIdfPath": "${containerEnv:IDF_PATH}",
+                "idf.pythonBinPath": "${containerEnv:IDF_TOOLS_PATH}/python_env/idf5.3_py3.10_env/bin/python",
+                "idf.buildPath": "/opt/hello_world/build",
+                "idf.telemetry": false
+            }  
+        }
+    },
+    "workspaceFolder": "/opt/hello_world",
+    "userEnvProbe": "loginInteractiveShell"
+}

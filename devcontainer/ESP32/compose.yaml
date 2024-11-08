@@ -1,0 +1,24 @@
+services:
+  esp32:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # you might need to update idf.pythonBinPath in devcontainer.json if changing idf_version.
+        - IDF_VERSION=release-v5.3
+        #- IDF_VERSION=v5.1.3
+        #- IDF_VERSION=release-v4.1
+        #- IDF_VERSION=v3.3.1
+        - ESP32_TARGET_ARCH=esp32
+        - USERNAME=vscode
+        - USER_UID=1000
+        - USER_GID=1000
+    stdin_open: true
+    tty: true
+    # Also recommended in esp-idf examples using docker
+    privileged: true
+    # If you don't like privileged, the below might be suitable.
+    # NB: JTAG debug seems to have issues with this but privileged works.
+    #devices:
+    #- '/dev/ttyUSB0:/dev/ttyUSB0'
+    #- '/dev/ttyUSB1:/dev/ttyUSB1'
